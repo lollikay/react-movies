@@ -1,10 +1,12 @@
 import Rating from "../rating";
 import { useGetGenresQuery, useGetMoviesConfigQuery } from "../../services/movies.js";
+import { Link } from "react-router-dom";
+import {getYearFromString} from "../../js/utils/getYearFromString.js";
 
 export default function MoviesItem(props) {
   const { movie, className } = props;
   const { id, title, release_date, vote_average, poster_path, genre_ids } = movie;
-  const movieYear = release_date ? new Date(release_date)?.getFullYear() : "";
+  const movieYear = getYearFromString(release_date);
   const { data: moviesCfg, error: moviesCfgError, isLoading: moviesCfgIsLoading } = useGetMoviesConfigQuery();
   const imagePath = moviesCfg ? (moviesCfg.images.base_url + "w500/" + poster_path) : null;
   const { data: genres, error: genresError, isLoading: genresIsLoading } = useGetGenresQuery();
@@ -13,11 +15,12 @@ export default function MoviesItem(props) {
                             .filter((id) => typeof id !== "undefined")
                             .join(", ")
     : "";
+  const movieDetailsLink = `/movie/${id}`;
 
   return (
-      <figure className={`flex flex-col h-full ${className}`}>
-        <a className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80"
-          href="#"
+      <figure className={`flex flex-col h-full bg-white rounded-md overflow-hidden ${className}`}>
+        <Link className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80"
+          to={movieDetailsLink}
         >
           {imagePath && (
             <img src={imagePath}
@@ -28,14 +31,16 @@ export default function MoviesItem(props) {
                 loading="lazy"
             />
           )}
-        </a>
-        <figcaption className="mt-4 flex-grow flex flex-col">
+        </Link>
+        <figcaption className="flex-grow flex flex-col p-4">
           <h3 className="text-gray-700">
-            <a href="#">
+            <Link to={movieDetailsLink}>
               {title}
-            </a>
+            </Link>
           </h3>
-          <p className="mt-2 text-sm text-gray-500">Year: {movieYear}</p>
+          {movieYear && (
+            <p className="mt-2 text-sm text-gray-500">Year: {movieYear}</p>
+          )}
           <p className="mt-1 text-sm text-gray-500">
             Genre: {movieGenres}
           </p>

@@ -1,17 +1,20 @@
 import { Provider } from 'react-redux'
-import { NavLink, Route, Routes } from 'react-router-dom'
+import {NavLink, Route, Routes} from 'react-router-dom';
 import appStore from '@store';
 import "/src/styles/index.css";
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import {getClassNames} from "./js/utils/getClassNames.js";
+import { getClassNames } from "./js/utils/getClassNames.js";
+import Movie from "./pages/Movie.jsx";
+import ErrorPage from "./pages/ErrorPage.jsx";
+import Home from "./pages/Home.jsx";
 
 // Auto generates routes from files under ./pages
 // https://vitejs.dev/guide/features.html#glob-import
 const pages = import.meta.glob('./pages/*.jsx', { eager: true })
 
 const routes = Object.keys(pages).map((path) => {
-  const name = path.match(/\.\/pages\/(.*)\.jsx$/)[1]
+  const name = path.match(/\.\/pages\/(.*)\.jsx$/)[1];
   return {
     name,
     path: name === 'Home' ? '/' : `/${name.toLowerCase()}`,
@@ -22,7 +25,7 @@ const routes = Object.keys(pages).map((path) => {
 export function App({ store = appStore }) {
   return (
     <Provider store={store}>
-      <div className="min-h-full">
+      <div className="min-h-full flex flex-col">
         <Disclosure as="nav" className="bg-gray-800">
           {({ open }) => (
             <>
@@ -88,8 +91,13 @@ export function App({ store = appStore }) {
         </Disclosure>
         <Routes>
             {routes.map(({ path, component: RouteComp }) => {
-              return <Route key={path} path={path} element={<RouteComp />}></Route>
+              return <Route key={path} path={path} element={<RouteComp />} />
             })}
+          <Route path="movie">
+            <Route path=":movieId" element={<Movie />} />
+            <Route index element={<ErrorPage />} />
+          </Route>
+          <Route path="*" element={<ErrorPage />}/>
         </Routes>
       </div>
     </Provider>
