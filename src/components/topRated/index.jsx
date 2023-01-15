@@ -14,7 +14,7 @@ export default function TopRated(props) {
           <Loader/>
         ) : data ? (
           <>
-            <header>
+            <header className="mb-6">
               <h2 className="text-2xl font-bold text-gray-900">
                 Top {qty} best rated movies
               </h2>

@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import TopRated from "../components/topRated/index.jsx";
-import {Header} from "../components/header";
+import { Header } from "../components/header";
+import { MoviesSearch } from "../components/moviesSearch";
 
 export default function Home() {
   const state = useSelector(state => state);
@@ -12,9 +13,7 @@ export default function Home() {
       <main>
         <div className="mx-auto max-w-7xl p-6 lg:px-8 xl:py-8">
           <TopRated qty="8"></TopRated>
-
-
-
+          <MoviesSearch/>
         </div>
       </main>
     </>

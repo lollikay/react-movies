@@ -1,7 +1,7 @@
 import Rating from "../rating";
 import { useGetGenresQuery, useGetMoviesConfigQuery } from "../../services/movies.js";
 import { Link } from "react-router-dom";
-import {getYearFromString} from "../../js/utils/getYearFromString.js";
+import { getYearFromString } from "../../js/utils/getYearFromString.js";
 
 export default function MoviesItem(props) {
   const { movie, className } = props;
