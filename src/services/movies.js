@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { apiKey } from "./apiKey.js";
+import { tmdbApiKey } from "../configs/tmdbApiKey.js";
 
 export const moviesApi = createApi({
   reducerPath: 'moviesApi',
@@ -8,28 +8,27 @@ export const moviesApi = createApi({
   }),
   endpoints: (builder) => ({
     getTopRatedMovies: builder.query({
-      query: () => `movie/top_rated?${apiKey}`,
+      query: () => `movie/top_rated?${tmdbApiKey}`,
     }),
-    getMoviesByGenre: builder.query({
-      query: ({genreId}) => `discover/movie?${apiKey}&with_genres=${genreId}`
-    }),
-    getMoviesByYear: builder.query({
-      query: (year) => `discover/movie?${apiKey}&year=${year}`
-    }),
-    getMoviesByRating: builder.query({
-      query: (rating) => `discover/movie?${apiKey}&vote_average.gte=${rating}`
+    getFilteredMovies: builder.query({
+      query: ({genreId = "", year = "", rating = ""}) => {
+        const genreParam = genreId ? `&with_genres=${genreId}` : "";
+        const yearParam = year ? `&year=${year}` : "";
+        const ratingParam = rating ? `&vote_average.gte=${rating}` : "";
+        return `discover/movie?${tmdbApiKey}${genreParam}${yearParam}${ratingParam}`
+      }
     }),
     getMoviesByTitle: builder.query({
-      query: (title) => `search/movie?${apiKey}&query=${rating}`
+      query: (title) => `search/movie?${tmdbApiKey}&query=${title}`
     }),
     getMoviesConfig: builder.query({
-      query: () => `configuration?${apiKey}`
+      query: () => `configuration?${tmdbApiKey}`
     }),
     getGenres: builder.query({
-      query: () => `genre/movie/list?${apiKey}`
+      query: () => `genre/movie/list?${tmdbApiKey}`
     }),
     getMovieById: builder.query({
-      query: (id) => `movie/${id}?${apiKey}`
+      query: (id) => `movie/${id}?${tmdbApiKey}`
     })
 }),
 })

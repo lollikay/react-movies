@@ -61,7 +61,7 @@ export default function Movie(props) {
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                           allowFullScreen
                           className="w-full aspect-video"
-                  ></iframe>
+                  />
                 </div>
               </div>
             </div>
