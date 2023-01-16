@@ -1,4 +1,4 @@
-import MoviesItem from "../moviesItem/index.jsx";
+import MoviesItem from "../MoviesItem/index.jsx";
 
 export const MoviesList = (props) => {
   const { movies } = props;

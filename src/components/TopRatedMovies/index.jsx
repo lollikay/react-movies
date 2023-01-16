@@ -1,9 +1,9 @@
 import { useGetTopRatedMoviesQuery } from "../../services/movies.js";
-import Loader from "../loader";
-import {MoviesList} from "../moviesList";
+import Loader from "../Loader";
+import {MoviesList} from "../MoviesList";
 
-export default function TopRated(props) {
-  const { qty } = props
+export default function TopRatedMovies(props) {
+  const { qty } = props;
   const { data, error, isLoading } = useGetTopRatedMoviesQuery();
 
   return (

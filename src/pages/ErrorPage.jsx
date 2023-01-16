@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { Header } from "../components/header";
+import { Header } from "../components/Header";
 
 export default function ErrorPage(props) {
   const { className = "" } = props;

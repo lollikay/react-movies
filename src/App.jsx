@@ -2,12 +2,13 @@ import { Provider } from 'react-redux'
 import {NavLink, Route, Routes} from 'react-router-dom';
 import appStore from '@store';
 import "/src/styles/index.css";
-import { Disclosure, Menu, Transition } from '@headlessui/react';
+import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { getClassNames } from "./js/utils/getClassNames.js";
 import Movie from "./pages/Movie.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import Home from "./pages/Home.jsx";
+import {MoviesSearchForm} from "./components/MoviesSearchForm";
 
 // Auto generates routes from files under ./pages
 // https://vitejs.dev/guide/features.html#glob-import
@@ -31,7 +32,7 @@ export function App({ store = appStore }) {
             <>
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-16 items-center justify-between">
-                  <div className="flex items-center">
+                  <div className="flex w-full items-center">
                     <div className="hidden md:block">
                       <ul className="flex items-baseline space-x-4">
                         {routes.map(({ name, path }) => {
@@ -51,6 +52,9 @@ export function App({ store = appStore }) {
                           )
                         })}
                       </ul>
+                    </div>
+                    <div className="hidden md:block ml-auto">
+                      <MoviesSearchForm />
                     </div>
                     <div className="-mr-2 flex md:hidden">
                       {/* Mobile menu button */}
@@ -79,7 +83,12 @@ export function App({ store = appStore }) {
                             }}
                           to={path}
                         >
-                          {name}
+                          <Disclosure.Button
+                            key={name}
+                            as="span"
+                          >
+                            {name}
+                          </Disclosure.Button>
                         </NavLink>
                       </li>
                     )

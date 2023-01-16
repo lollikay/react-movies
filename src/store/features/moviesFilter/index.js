@@ -19,10 +19,13 @@ export const moviesFilterSlice = createSlice({
       state.error = action.payload;
     },
     setFilter: (state, action) => {
-      state.filter = action.payload
+      state.filter = {
+        ...state.filter,
+        ...action.payload
+      }
     }
   },
 })
 
-export const { setError } = moviesFilterSlice.actions
+export const { setError, setFilter } = moviesFilterSlice.actions
 export default moviesFilterSlice.reducer

@@ -1,7 +1,6 @@
-import Loader from "../loader/index.jsx";
-import { MoviesFilter } from "../moviesFilter/index.jsx";
+import { MoviesFilter } from "../MoviesFilter/index.jsx";
 
-export const MoviesSearch = (props) => {
+export const MoviesFilterSection = (props) => {
   const { className } = props;
 
   return (

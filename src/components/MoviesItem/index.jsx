@@ -1,4 +1,4 @@
-import Rating from "../rating";
+import Rating from "../Rating";
 import { useGetGenresQuery, useGetMoviesConfigQuery } from "../../services/movies.js";
 import { Link } from "react-router-dom";
 import { getYearFromString } from "../../js/utils/getYearFromString.js";
@@ -34,7 +34,7 @@ export default function MoviesItem(props) {
         </Link>
         <figcaption className="flex-grow flex flex-col p-4">
           <h3 className="text-gray-700">
-            <Link to={movieDetailsLink}>
+            <Link to={movieDetailsLink} className="hover:text-rose-400">
               {title}
             </Link>
           </h3>

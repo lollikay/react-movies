@@ -1,7 +1,6 @@
 import { isStorageAvailable } from "./isStorageAvailable.js";
 
-export const getFromLocalStorage = (item = "") => {
+export const writeToLocalStorage = (item = "", value = "") => {
   if(!item || !isStorageAvailable("localStorage")) return "";
-
-  return localStorage.getItem(item) || "";
+  return localStorage.setItem(item, value);
 }

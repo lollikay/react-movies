@@ -11,9 +11,9 @@ export const moviesApi = createApi({
       query: () => `movie/top_rated?${tmdbApiKey}`,
     }),
     getFilteredMovies: builder.query({
-      query: ({genreId = "", year = "", rating = ""}) => {
-        const genreParam = genreId ? `&with_genres=${genreId}` : "";
-        const yearParam = year ? `&year=${year}` : "";
+      query: ({genre = "", year = "", rating = ""}) => {
+        const genreParam = genre ? `&with_genres=${genre}` : "";
+        const yearParam = year ? `&primary_release_year=${year}` : "";
         const ratingParam = rating ? `&vote_average.gte=${rating}` : "";
         return `discover/movie?${tmdbApiKey}${genreParam}${yearParam}${ratingParam}`
       }
@@ -35,11 +35,9 @@ export const moviesApi = createApi({
 
 export const {
   useGetTopRatedMoviesQuery,
-  useGetMoviesByGenreQuery,
-  useGetMoviesByYearQuery,
-  useGetMoviesByRatingQuery,
-  useGetMoviesByTitleQuery,
+  useGetFilteredMoviesQuery,
   useGetMoviesConfigQuery,
   useGetGenresQuery,
-  useGetMovieByIdQuery
+  useGetMovieByIdQuery,
+  useGetMoviesByTitleQuery
 } = moviesApi

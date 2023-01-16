@@ -1,39 +1,58 @@
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { useGetGenresQuery } from "../../services/movies.js";
+import {setFilter} from "../../store/features/moviesFilter/index.js";
+import {writeToLocalStorage} from "../../js/utils/writeToLocalStorage.js";
+import { movieFilters } from "../../configs/localStorageVars.js";
+import {useState} from "react";
 
 export const MoviesFilter = (props) => {
   const { filter, error } = useSelector(state => state.moviesFilter);
-  const currentFilter = {
-    ...filter,
-    year: props.year || null,
-    rating: props.rating || null,
-    genre: props.genre || null
-  }
   const { data: genres, error: genresError, isLoading: genresIsLoading } = useGetGenresQuery();
-  const formName = `movies-filter-form`
+  const formName = `movies-filter-form`;
+  const dispatch = useDispatch();
+  const [currentFilter, setCurrentFilter] = useState(filter);
+
+  const handleInputChange = (e, filterName) => {
+    // console.debug(e)
+    const { target } = e;
+    setCurrentFilter((state) => {
+      return {
+        ...state,
+        [filterName]: target.value
+      }
+    })
+  }
+
+  const saveFilterValues = () => {
+    Object.entries(currentFilter).forEach(([ key, value ]) => {
+      writeToLocalStorage(movieFilters[key], value);
+    })
+  }
+
+  const handleFormSubmit = (e) => {
+    saveFilterValues();
+    dispatch(setFilter(currentFilter));
+  }
 
   return (
     <>
-      <form action="" className="w-full bg-white rounded-md p-6 mb-8" name={formName} id={formName}>
+      <form action="/movies"
+            className="w-full bg-white rounded-md p-6 mb-8"
+            name={formName}
+            id={formName}
+            onSubmit={handleFormSubmit}
+      >
         <div className="grid grid-cols-12 gap-6">
-        <div className="col-span-12">
-          <label>
-            <span className="block mb-2 text-sm font-medium text-gray-700">Search by title:</span>
-            <input type="search"
-                   name={`${formName}-title`}
-                   className="block w-full rounded-md focus:border-pink-500 focus:ring-pink-500"
-            />
-          </label>
-        </div>
         <div className="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3">
           <label>
             <span className="block mb-2 text-sm font-medium text-gray-700">Filter by release year:</span>
             <input type="text"
-                   defaultValue={currentFilter.year || ""}
+                   value={currentFilter.year || ""}
                    placeholder={new Date().getFullYear().toString()}
                    maxLength="4"
                    name={`${formName}-year`}
                    className="block w-full rounded-md focus:border-pink-500 focus:ring-pink-500"
+                   onChange={(e) => handleInputChange(e, "year")}
             />
           </label>
         </div>
@@ -42,8 +61,9 @@ export const MoviesFilter = (props) => {
             <span className="block mb-2 text-sm font-medium text-gray-700">Choose genre:</span>
             <select name={`${formName}-genre`}
                     placeholder="Select one"
-                    defaultValue={currentFilter.genre || ""}
+                    value={currentFilter.genre || ""}
                     className="block w-full rounded-md focus:border-pink-500 focus:ring-pink-500"
+                    onChange={(e) => handleInputChange(e, "genre")}
             >
               <option value="">Choose genre</option>
               {genres && genres.genres.map((genre, index) => (
@@ -56,11 +76,12 @@ export const MoviesFilter = (props) => {
           <label>
             <span className="block mb-2 text-sm font-medium text-gray-700">Filter by rating:</span>
             <input type="text"
-                   defaultValue={currentFilter.rating || ""}
+                   value={currentFilter.rating || ""}
                    name={`${formName}-rating`}
                    placeholder="8"
                    className="block w-full rounded-md focus:border-pink-500 focus:ring-pink-500"
                    maxLength="4"
+                   onChange={(e) => handleInputChange(e, "rating")}
             />
           </label>
         </div>

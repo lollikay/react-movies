@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import { Header } from "../components/header/index.jsx";
-import Loader from "../components/loader/index.jsx";
+import { Header } from "../components/Header/index.jsx";
+import Loader from "../components/Loader/index.jsx";
 import { useGetMovieByIdQuery } from "../services/movies.js";
 import {getClassNames} from "../js/utils/getClassNames.js";
 import {getYearFromString} from "../js/utils/getYearFromString";

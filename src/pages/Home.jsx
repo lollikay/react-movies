@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
-import TopRated from "../components/topRated/index.jsx";
-import { Header } from "../components/header";
-import { MoviesSearch } from "../components/moviesSearch";
+import TopRatedMovies from "../components/TopRatedMovies/index.jsx";
+import { Header } from "../components/Header";
+import { MoviesFilterSection } from "../components/MoviesFilterSection";
 
 export default function Home() {
   const state = useSelector(state => state);
@@ -12,8 +12,8 @@ export default function Home() {
       <Header>Welcome to WMDB (wonderful movies database)!</Header>
       <main>
         <div className="mx-auto max-w-7xl p-6 lg:px-8 xl:py-8">
-          <TopRated qty="8"></TopRated>
-          <MoviesSearch/>
+          <TopRatedMovies qty="8"></TopRatedMovies>
+          <MoviesFilterSection/>
         </div>
       </main>
     </>
