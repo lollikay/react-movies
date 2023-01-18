@@ -1,16 +1,17 @@
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useGetGenresQuery } from "../../services/movies.js";
-import {setFilter} from "../../store/features/moviesFilter/index.js";
-import {writeToLocalStorage} from "../../js/utils/writeToLocalStorage.js";
+import { setFilter } from "../../store/features/moviesFilter/index.js";
+import { writeToLocalStorage } from "../../js/utils/writeToLocalStorage.js";
 import { movieFilters } from "../../configs/localStorageVars.js";
 import {useState} from "react";
 
 export const MoviesFilter = (props) => {
-  const { filter, error } = useSelector(state => state.moviesFilter);
+  const { filters } = props;
   const { data: genres, error: genresError, isLoading: genresIsLoading } = useGetGenresQuery();
-  const formName = `movies-filter-form`;
+  const formName = "movies-filter-form";
   const dispatch = useDispatch();
-  const [currentFilter, setCurrentFilter] = useState(filter);
+
+  const [currentFilter, setCurrentFilter] = useState(filters);
 
   const handleInputChange = (e, filterName) => {
     // console.debug(e)
@@ -50,8 +51,8 @@ export const MoviesFilter = (props) => {
                    value={currentFilter.year || ""}
                    placeholder={new Date().getFullYear().toString()}
                    maxLength="4"
-                   name={`${formName}-year`}
-                   className="block w-full rounded-md focus:border-pink-500 focus:ring-pink-500"
+                   name={`year`}
+                   className="block w-full rounded-md focus:border-pink-500 focus:ring-pink-500 placeholder:text-slate-400"
                    onChange={(e) => handleInputChange(e, "year")}
             />
           </label>
@@ -59,10 +60,10 @@ export const MoviesFilter = (props) => {
         <div className="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3">
           <label>
             <span className="block mb-2 text-sm font-medium text-gray-700">Choose genre:</span>
-            <select name={`${formName}-genre`}
+            <select name={`genre`}
                     placeholder="Select one"
                     value={currentFilter.genre || ""}
-                    className="block w-full rounded-md focus:border-pink-500 focus:ring-pink-500"
+                    className="block w-full rounded-md focus:border-pink-500 focus:ring-pink-500 placeholder:text-slate-400"
                     onChange={(e) => handleInputChange(e, "genre")}
             >
               <option value="">Choose genre</option>
@@ -77,9 +78,9 @@ export const MoviesFilter = (props) => {
             <span className="block mb-2 text-sm font-medium text-gray-700">Filter by rating:</span>
             <input type="text"
                    value={currentFilter.rating || ""}
-                   name={`${formName}-rating`}
+                   name={`rating`}
                    placeholder="8"
-                   className="block w-full rounded-md focus:border-pink-500 focus:ring-pink-500"
+                   className="block w-full rounded-md focus:border-pink-500 focus:ring-pink-500 placeholder:text-slate-400"
                    maxLength="4"
                    onChange={(e) => handleInputChange(e, "rating")}
             />
