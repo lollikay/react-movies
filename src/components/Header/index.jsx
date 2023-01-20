@@ -1,5 +1,5 @@
 export const Header = (props) => {
-  const { children, className } = props;
+  const { children, className = "" } = props;
 
   return (
     <header className={`${className}`}>

@@ -5,7 +5,7 @@ import { getYearFromString } from "../../js/utils/getYearFromString.js";
 
 export default function MoviesItem(props) {
   const { movie, className } = props;
-  const { id, title, release_date, vote_average, poster_path, genre_ids } = movie;
+  const { id, title, release_date, vote_average, poster_path, genre_ids, vote_count } = movie;
   const movieYear = getYearFromString(release_date);
   const { data: moviesCfg, error: moviesCfgError, isLoading: moviesCfgIsLoading } = useGetMoviesConfigQuery();
   const imagePath = moviesCfg ? (moviesCfg.images.base_url + "w500/" + poster_path) : null;
@@ -33,19 +33,19 @@ export default function MoviesItem(props) {
           )}
         </Link>
         <figcaption className="flex-grow flex flex-col p-4">
-          <h3 className="text-gray-700">
+          <h3 className="text-lg text-gray-700 mb-2">
             <Link to={movieDetailsLink} className="hover:text-rose-400">
               {title}
             </Link>
           </h3>
           {movieYear && (
-            <p className="mt-2 text-sm text-gray-500">Year: {movieYear}</p>
+            <p className="text-sm text-gray-500 mb-1">Year: {movieYear}</p>
           )}
-          <p className="mt-1 text-sm text-gray-500">
+          <p className="text-sm text-gray-500 mb-3">
             Genre: {movieGenres}
           </p>
           <p className="mt-auto text-gray-500">
-            <Rating value={vote_average} className="mt-2"></Rating>
+            <Rating value={vote_average} count={vote_count}></Rating>
           </p>
         </figcaption>
       </figure>

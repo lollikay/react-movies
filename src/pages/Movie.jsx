@@ -5,6 +5,7 @@ import { useGetMovieByIdQuery } from "../services/movies.js";
 import {getClassNames} from "../js/utils/getClassNames.js";
 import {getYearFromString} from "../js/utils/getYearFromString";
 import {getYTVideoUrl} from "../js/utils/getYTVideoUrl.js";
+import ErrorPage from "./ErrorPage";
 
 export default function Movie(props) {
   const { className } = props;
@@ -13,7 +14,7 @@ export default function Movie(props) {
 
   let characteristics = data ? {
     "Year": getYearFromString(data.release_date),
-    "Rating": data.vote_average,
+    "Rating": data.vote_average + " (based on " + data.vote_count + " votes)",
     "Genres": data.genres.map((genre) => genre.name).join(", ")
   } : {};
 
@@ -21,11 +22,7 @@ export default function Movie(props) {
     <article className={className}>
       {error ? (
         <>
-          <main>
-            <div className="mx-auto max-w-7xl p-6 lg:px-8 xl:py-8">
-              Oh no, there was an error
-            </div>
-          </main>
+          <ErrorPage />
         </>
       ) : isLoading ? (
         <Loader/>

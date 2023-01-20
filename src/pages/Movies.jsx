@@ -13,9 +13,9 @@ export default function Movies(props) {
   const filterFromParams = paramsToObject(searchParams);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(setFilter(filterFromParams));
-  // }, [ searchParams ])
+  useEffect(() => {
+    dispatch(setFilter(filterFromParams));
+  }, [])
 
   return (
     <>
