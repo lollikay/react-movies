@@ -1,4 +1,5 @@
 export const isStorageAvailable = (type) => {
+  if(typeof window === "undefined") return false;
   let storage;
   try {
     storage = window[type];
