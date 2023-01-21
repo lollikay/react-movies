@@ -1,13 +1,13 @@
 import * as toolkitRaw from '@reduxjs/toolkit/dist/query/react/index';
-const { createApi } = toolkitRaw.default ?? toolkitRaw;
-import * as rtk2 from '@reduxjs/toolkit/dist/query/react/index';
-const { fetchBaseQuery } = rtk2.default ?? rtk2;
+const { createApi, fetchBaseQuery } = toolkitRaw.default ?? toolkitRaw;
 import { tmdbApiKey } from "../configs/tmdbApiKey.js";
+import fetch from "isomorphic-fetch"
 
 export const moviesApi = createApi({
   reducerPath: 'moviesApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://api.themoviedb.org/3/'
+    baseUrl: 'https://api.themoviedb.org/3/',
+    fetchFn: fetch
   }),
   endpoints: (builder) => ({
     getTopRatedMovies: builder.query({
