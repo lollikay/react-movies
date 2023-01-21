@@ -11,15 +11,17 @@ export const MoviesFilter = (props) => {
     genre: "",
     rating: ""
   }
-  const { filters = defaultFilters } = props;
+  const { filters } = props;
   const { data: genres, error: genresError, isLoading: genresIsLoading } = useGetGenresQuery();
   const formName = "movies-filter-form";
   const dispatch = useDispatch();
 
-  const [currentFilter, setCurrentFilter] = useState(filters);
+  const [currentFilter, setCurrentFilter] = useState(defaultFilters);
 
   useEffect(() => {
-    setCurrentFilter(filters);
+    if(filters) {
+      setCurrentFilter(filters);
+    }
   }, [ filters ])
 
   const handleInputChange = (e, filterName) => {

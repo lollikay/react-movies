@@ -52,7 +52,7 @@ export const MoviesSearchForm = (props) => {
                     {data.results.slice(0, 4).map((movie) => {
                       return (
                         <li key={movie.id}>
-                          <a href={`/movie/${movie.id}`} className="hover:text-rose-400">
+                          <a href={`/movie/${movie.id}`} className="hover:text-pink-400">
                             {movie.title}, {getYearFromString(movie.release_date)}
                           </a>
                         </li>

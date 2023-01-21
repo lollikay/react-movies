@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
     <>
-      <Header>Welcome to WMDB (wonderful movies database)!</Header>
+      <Header>Welcome to <span className="text-pink-400">WMDB</span> (wonderful movies database)!</Header>
       <main>
         <div className="mx-auto max-w-7xl p-6 lg:px-8 xl:py-8">
           <TopRatedMovies qty="8"></TopRatedMovies>

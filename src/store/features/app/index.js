@@ -1,4 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
+import * as toolkitRaw from '@reduxjs/toolkit';
+const { createSlice } = toolkitRaw.default ?? toolkitRaw;
 
 const initialState = {
     error: null,

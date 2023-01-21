@@ -4,8 +4,8 @@ import Loader from "../components/Loader/index.jsx";
 import { useGetMovieByIdQuery } from "../services/movies.js";
 import {getClassNames} from "../js/utils/getClassNames.js";
 import {getYearFromString} from "../js/utils/getYearFromString";
-import {getYTVideoUrl} from "../js/utils/getYTVideoUrl.js";
 import ErrorPage from "./ErrorPage";
+import {Video} from "../components/Video";
 
 export default function Movie(props) {
   const { className } = props;
@@ -52,14 +52,7 @@ export default function Movie(props) {
                     </dl>
                   )}
                 </div>
-                <div className="relative">
-                  <iframe width="560" height="315" src={getYTVideoUrl(movieId)}
-                          title="YouTube video player" frameBorder="0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                          allowFullScreen
-                          className="w-full aspect-video"
-                  />
-                </div>
+                <Video movieId={movieId} />
               </div>
             </div>
           </main>

@@ -1,4 +1,5 @@
-import { configureStore } from '@reduxjs/toolkit'
+import * as toolkitRaw from '@reduxjs/toolkit';
+const { configureStore } = toolkitRaw.default ?? toolkitRaw;
 import appReducer from './features/app';
 import { moviesApi } from "../services/movies.js";
 import moviesFilterReducer from "./features/moviesFilter";

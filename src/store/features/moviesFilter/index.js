@@ -1,4 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
+import * as toolkitRaw from '@reduxjs/toolkit';
+const { createSlice } = toolkitRaw.default ?? toolkitRaw;
 import { getFromLocalStorage } from "../../../js/utils/getFromLocalStorage.js";
 import { movieFilters } from "../../../configs/localStorageVars.js";
 

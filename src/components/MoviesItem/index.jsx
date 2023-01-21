@@ -34,7 +34,7 @@ export default function MoviesItem(props) {
         </Link>
         <figcaption className="flex-grow flex flex-col p-4">
           <h3 className="text-lg text-gray-700 mb-2">
-            <Link to={movieDetailsLink} className="hover:text-rose-400">
+            <Link to={movieDetailsLink} className="hover:text-pink-400">
               {title}
             </Link>
           </h3>

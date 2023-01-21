@@ -10,7 +10,7 @@ export default function ErrorPage(props) {
       <main>
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
           <p>
-            Yeah, not very wonderful. But you could go <NavLink className="text-rose-500" to="/">home</NavLink> anytime.
+            Yeah, not very wonderful. But you could go <NavLink className="text-pink-500" to="/">home</NavLink> anytime.
           </p>
         </div>
       </main>

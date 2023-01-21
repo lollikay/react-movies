@@ -1,4 +1,7 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import * as toolkitRaw from '@reduxjs/toolkit/dist/query/react/index';
+const { createApi } = toolkitRaw.default ?? toolkitRaw;
+import * as rtk2 from '@reduxjs/toolkit/dist/query/react/index';
+const { fetchBaseQuery } = rtk2.default ?? rtk2;
 import { tmdbApiKey } from "../configs/tmdbApiKey.js";
 
 export const moviesApi = createApi({
