@@ -5,7 +5,11 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      aspectRatio: {
+        'video': '16 / 9',
+      },
+    },
   },
   plugins: [
     require('@tailwindcss/typography'),

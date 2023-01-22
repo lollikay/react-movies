@@ -8,7 +8,7 @@ export const Video = (props) => {
     <YouTube
       videoId={getYTVideoId(movieId)}
       id={movieId}
-      className={"relative aspect-[4/3]"}
+      className={"relative aspect-video"}
       iframeClassName={"w-full h-full absolute top-0 left-0 object-contain"}
     />
   )
