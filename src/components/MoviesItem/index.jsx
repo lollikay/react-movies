@@ -8,7 +8,7 @@ export default function MoviesItem(props) {
   const { id, title, release_date, vote_average, poster_path, genre_ids, vote_count } = movie;
   const movieYear = getYearFromString(release_date);
   const { data: moviesCfg, error: moviesCfgError, isLoading: moviesCfgIsLoading } = useGetMoviesConfigQuery();
-  const imagePath = moviesCfg ? (moviesCfg.images.base_url + "w500/" + poster_path) : null;
+  const imagePath = moviesCfg && poster_path ? (moviesCfg.images.base_url + "w500/" + poster_path) : null;
   const { data: genres, error: genresError, isLoading: genresIsLoading } = useGetGenresQuery();
   const movieGenres = (genres && genre_ids) ?
     genre_ids.map((id) => genres.genres.find((item) => item.id === id).name)

@@ -37,7 +37,11 @@ export default function Search(props) {
                     </p>
                   )}
             </section>
-          ) : null}
+          ) : (
+            <p>
+              Enter some title into the search field to see the list
+            </p>
+          )}
         </div>
       </main>
     </>

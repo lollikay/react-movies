@@ -1,3 +1,5 @@
+import {Input} from "../Input/index.jsx";
+
 export const SearchForm = (props) => {
   const { query } = props;
 
@@ -6,10 +8,9 @@ export const SearchForm = (props) => {
       <div className="grid grid-cols-4 gap-2 gap-y-3 max-w-3xl">
         <label className="text-2xl col-span-4" htmlFor="search-form-title">Search movie by title:</label>
         <div className="col-span-3">
-          <input type="search"
+          <Input type="search"
                  name="title"
                  id="search-form-title"
-                 className="block w-full rounded-md focus:border-pink-500 focus:ring-pink-500"
                  placeholder="Enter title"
                  defaultValue={query}
           />

@@ -2,13 +2,15 @@ import { Disclosure } from '@headlessui/react';
 import { useGetMoviesByTitleQuery } from "../../services/movies.js";
 import {useState} from "react";
 import {getYearFromString} from "../../js/utils/getYearFromString.js";
+import { Link } from "react-router-dom";
+import {Input} from "../Input/index.jsx";
 
-export const MoviesSearchForm = (props) => {
+export const SearchFormWHints = (props) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [skip, setSkip] = useState(true);
   const handleInputChange = (e) => {
     setSearchQuery(e.target.value);
-    if(e.target.value.length > 3) {
+    if(e.target.value.length > 2) {
       setSkip(false);
     }
   }
@@ -17,7 +19,7 @@ export const MoviesSearchForm = (props) => {
   });
 
   const handleFormSubmit = (e) => {
-    if(searchQuery.length < 3) {
+    if(searchQuery.length < 2) {
       e.preventDefault();
     }
   }
@@ -30,10 +32,9 @@ export const MoviesSearchForm = (props) => {
             <div className="grid grid-cols-4 gap-2">
             <label className="hidden" htmlFor="search-by-title-title">Search movie by title</label>
             <Disclosure.Button className="col-span-3">
-              <input type="search"
+              <Input type="search"
                      name="title"
                      id="search-by-title-title"
-                     className="block w-full rounded-md focus:border-pink-500 focus:ring-pink-500"
                      placeholder="Search by movie title"
                      value={searchQuery}
                      onChange={(e) => handleInputChange(e)}
@@ -51,10 +52,12 @@ export const MoviesSearchForm = (props) => {
                   <ul>
                     {data.results.slice(0, 4).map((movie) => {
                       return (
-                        <li key={movie.id}>
-                          <a href={`/movie/${movie.id}`} className="hover:text-pink-400">
-                            {movie.title}, {getYearFromString(movie.release_date)}
-                          </a>
+                        <li key={movie.id} className="mb-1">
+                          <Link to={`/movie/${movie.id}`} className="hover:text-pink-400">
+                            <Disclosure.Button as="span">
+                              {movie.title}, {getYearFromString(movie.release_date)}
+                            </Disclosure.Button>
+                          </Link>
                         </li>
                       )
                     })}

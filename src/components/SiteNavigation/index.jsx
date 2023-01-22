@@ -1,6 +1,6 @@
 import {NavLink} from "react-router-dom";
 import {getClassNames} from "../../js/utils/getClassNames.js";
-import {MoviesSearchForm} from "../MoviesSearchForm/index.jsx";
+import { SearchFormWHints } from "../SearchFormWHints/index.jsx";
 import {Disclosure} from "@headlessui/react";
 import {Bars3Icon, XMarkIcon} from "@heroicons/react/24/outline/index.js";
 
@@ -35,7 +35,7 @@ export const SiteNavigation = (props) => {
                   </ul>
                 </div>
                 <div className="hidden lg:block ml-auto">
-                  <MoviesSearchForm/>
+                  <SearchFormWHints/>
                 </div>
                 <div className="-mr-2 flex lg:hidden">
                   {/* Mobile menu button */}
@@ -66,7 +66,6 @@ export const SiteNavigation = (props) => {
                              to={path}
                     >
                       <Disclosure.Button
-                        key={name}
                         as="span"
                       >
                         {name}
