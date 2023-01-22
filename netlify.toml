@@ -1,4 +1,4 @@
 [[redirects]]
-  from = "/movie"
+  from = "/movie/*"
   to = "/"
   status = 200
